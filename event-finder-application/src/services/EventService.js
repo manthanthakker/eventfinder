@@ -23,7 +23,7 @@ export default class EventService {
 
     static findQueryEvents = (term) => {
         var obj = {
-            link: 'https://www.eventbriteapi.com/v3/events/search/?q=' + term + '&token=T7R72VLGMJOJWGPBHTFE',
+            link: 'https://www.eventbriteapi.com/v3/events/search/?q=boston&token=T7R72VLGMJOJWGPBHTFE',
             object: {
                 method: 'GET',
                 headers: new Headers({

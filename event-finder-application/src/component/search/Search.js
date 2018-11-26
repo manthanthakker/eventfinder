@@ -1,16 +1,21 @@
 import React, {Component} from 'react';
 import EventService from "../../services/EventService";
 import ResultList from "../results/ResultList";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import '../util.css'
+import Spinner from "../spinner/Spinner";
+
 
 export default class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
             query: '',
-            events: []
+            events: [],
+            spinner: true
         };
+        this.getQueryData();
     }
-
 
 
     updateForm = event =>
@@ -29,12 +34,26 @@ export default class Search extends Component {
             .then(this.render());
     };
 
+    showSpinner = () => {
+        this.setState({
+            spinner: true
+        });
+    };
+    unshowSpinner = () => {
+        this.setState({
+            spinner: false
+        });
+    };
+
     getQueryData = () => {
+        this.showSpinner();
+        debugger;
         EventService.findQueryEvents(this.state.query)
             .then(events => {
                 this.setState({
                     events: events.events
                 })
+                this.unshowSpinner();
             })
             .then(this.render());
     };
@@ -42,23 +61,29 @@ export default class Search extends Component {
     render() {
         return (
             <div className="row">
-                {console.log(this.state.events)}
                 <div className="col-3 sidebar"></div>
-
                 <div className="col-6">
                     <div name="search-bar"
-                         className="form-group">
-                        <input name="search-events"
-                               placeholder="Search a city"
-                               onChange={this.updateForm}
-                               className="form-control"/>
-                        <button name="search-query" onClick={() => this.getQueryData()}>
-                            Search
-                        </button>
+                         className="form-inline">
+                        <div className="col-10">
+                            <input name="search-events"
+                                   placeholder="Search a city"
+                                   onChange={this.updateForm}
+                                   className="form-control search-input"/>
+                        </div>
+                        <div className="col-2">
+                            <FontAwesomeIcon icon="search" size="2x" name="search-query"
+                                             onClick={() => this.getQueryData()}/>
+                        </div>
+                        <div className="col-12">
+                            <Spinner hidden={this.state.spinner}/>
+                            <ResultList
+                                events={this.state.events}/>
+                        </div>
+
                     </div>
-                    <ResultList
-                        events={this.state.events}/>
                 </div>
+
 
                 <div className="col-3 sidebar"></div>
             </div>

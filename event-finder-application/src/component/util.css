@@ -1,0 +1,20 @@
+.events-search-button{
+
+}
+.search-icon{
+    background-color: black;
+    color:white;
+}
+.search-input{
+    display: inline;
+}
+.form-inline .form-control {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+}
+.spinner{
+    left: 50%;
+    top:50%;
+    position: fixed;
+}

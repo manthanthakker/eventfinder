@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Result from "./Result";
+import "./ResultList.css"
 
 export default class ResultList extends Component {
     constructor(props) {
@@ -17,8 +18,8 @@ export default class ResultList extends Component {
 
     render() {
         return (
-            <div name="result-list">
-                <ul className="list-group">
+            <div name="result-list event-search-list" >
+                <ul className="list-group event-search-list">
                     {
                         this.state.events.map((event, key) =>
                             <Result
