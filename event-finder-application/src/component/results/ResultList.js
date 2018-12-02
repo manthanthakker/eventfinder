@@ -18,17 +18,18 @@ export default class ResultList extends Component {
 
     render() {
         return (
-            <div name="result-list event-search-list" >
+            <div name="result-list event-search-list">
                 <ul className="list-group event-search-list">
                     {
                         this.state.events.map((event, key) =>
                             <Result
                                 key={key}
-                                event={event}/>
+                                event={event}
+                                selectEvent={this.props.selectEvent}/>
                         )
                     }
                 </ul>
             </div>
-    )
+        )
     }
-    }
+}

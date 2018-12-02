@@ -1,3 +1,11 @@
 .event-search-list {
     background-color: white;
 }
+
+.logo {
+
+    max-width: 10%;
+    max-height: 5%;
+    width: auto;
+    height: auto;
+}
