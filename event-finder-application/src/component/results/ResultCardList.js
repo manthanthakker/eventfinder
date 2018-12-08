@@ -8,6 +8,8 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import DateTime from "react-datetime"
+import './ResultList.css'
+
 
 const styles = theme => ({
     root: {
@@ -56,13 +58,47 @@ function ResultCardList(props) {
             debugger;
             var start = new Date(event.start.local);
             var end = new Date(event.end.local);
-            var dateString = start.toLocaleDateString('en-GB', {
+            var dateString = start.toLocaleDateString('en-US', {
                 day: 'numeric',
                 month: 'short',
-                year: 'numeric'
+                year: 'numeric',
+                hour12: true
             });
             var duration = parseDuration(end - start).hours;
-            return (  <Typography color="textSecondary">{dateString}</Typography>)
+            return (
+                <div>
+                    <FontAwesomeIcon className="d-inline-block icon-padding" icon="calendar"/>
+                    <Typography className="d-inline-block" color="textSecondary">{dateString}</Typography>
+                </div>)
+        }
+    }
+
+    function renderDuration(event) {
+        debugger;
+        if (event.start.local && event.end.local) {
+            debugger;
+            var start = new Date(event.start.local);
+            var end = new Date(event.end.local);
+            var dateString = start.toLocaleDateString('en-US', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric',
+                hour12: true
+            });
+            var toDuration = {
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            };
+            // var duration = parseDuration(end - start).hours;
+            var duration = start.toLocaleDateString('en-US', toDuration).substring(11) + " - " +
+                end.toLocaleDateString('en-US', toDuration).substring(11);
+
+            return (
+                <div>
+                    <FontAwesomeIcon className="d-inline-block icon-padding" icon="clock"/>
+                    <Typography color="textSecondary" className="d-inline-block"> {duration}</Typography>
+                </div>)
         }
     }
 
@@ -136,6 +172,7 @@ function ResultCardList(props) {
                                 <Typography gutterBottom>Full resolution 1920x1080 • JPEG</Typography>
                                 {/*<Typography color="textSecondary">ID: 1030114</Typography>*/}
                                 {renderDate(props.event)}
+                                {renderDuration(props.event)}
 
                             </Grid>
                             {/*<Grid item>*/}
