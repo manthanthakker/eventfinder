@@ -9,6 +9,8 @@ import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import DateTime from "react-datetime"
 import './ResultList.css'
+import randomString from 'random-string'
+
 
 var randomMC = require('random-material-color');
 
@@ -166,7 +168,7 @@ function ResultCardList(props) {
     // }
 
     function getRandomColor() {
-        const color = randomMC.getColor();
+        const color = randomMC.getColor({ shades: ['100', '150  '], text:randomString() });
         return {
             backgroundColor: color
         };
