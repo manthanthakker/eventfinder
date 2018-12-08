@@ -10,31 +10,40 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import DateTime from "react-datetime"
 import './ResultList.css'
 
+var randomMC = require('random-material-color');
 
-const styles = theme => ({
-    root: {
-        flexGrow: 1,
-        padding: '1%'
-    },
-    paper: {
-        padding: theme.spacing.unit * 2,
-        margin: 'auto',
-        maxWidth: '100%'
-    },
-    image: {
-        width: 128,
-        height: 128,
-    },
-    img: {
-        margin: 'auto',
-        display: 'block',
-        maxWidth: '100%',
-        maxHeight: '100%',
-    },
-});
+
+const styles = theme => {
+    debugger;
+    const color = randomMC.getColor();
+    return ({
+        root: {
+            flexGrow: 1,
+            padding: '1%'
+        },
+        paper: {
+            padding: theme.spacing.unit * 2,
+            margin: 'auto',
+            maxWidth: '100%',
+            backgroundColor: color,
+        },
+        image: {
+            width: 128,
+            height: 128,
+        },
+        img: {
+            margin: 'auto',
+            display: 'block',
+            maxWidth: '100%',
+            maxHeight: '100%',
+        },
+    })
+};
 
 function ResultCardList(props) {
+
     const {classes} = props;
+
     debugger;
     console.log("here" + props);
 
@@ -156,9 +165,16 @@ function ResultCardList(props) {
     //     }
     // }
 
+    function getRandomColor() {
+        const color = randomMC.getColor();
+        return {
+            backgroundColor: color
+        };
+    }
+
     return (
         <div className={classes.root}>
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper} style={getRandomColor()}>
                 <Grid container spacing={16}>
                     <Grid item>
                         {renderImage(props.event)}
