@@ -14,12 +14,15 @@ import {
     faPaintBrush,
     faFilm,
     faCalendar,
-    faClock
+    faClock,
+    faMapMarker
 } from '@fortawesome/free-solid-svg-icons';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 
-library.add(faEnvelope, faKey, faSpinner, faSearch, faSnowflake, faUtensils, faMusic, faPaintBrush, faFilm, faCalendar, faClock);
+library.add(faEnvelope, faKey, faSpinner, faSearch, faSnowflake, faUtensils, faMusic, faPaintBrush, faFilm,
+    faCalendar, faClock,
+    faMapMarker);
 
 ReactDOM.render(
     <div className="container-fluid">

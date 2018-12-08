@@ -10,6 +10,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import DateTime from "react-datetime"
 import './ResultList.css'
 import randomString from 'random-string'
+import LocationCard from "./LocationCard";
 
 
 var randomMC = require('random-material-color');
@@ -144,16 +145,16 @@ function ResultCardList(props) {
         debugger;
         if (event.category_id) {
             if (event.category_id == "110") {
-                return <FontAwesomeIcon className="pull-right" icon="utensils"/>;
+                return <FontAwesomeIcon className="" icon="utensils"/>;
             }
             if (event.category_id == "103") {
-                return <FontAwesomeIcon className="pull-right" icon="music"/>;
+                return <FontAwesomeIcon className="" icon="music"/>;
             }
             if (event.category_id == "105") {
-                return <FontAwesomeIcon className="pull-right" icon="paint"/>;
+                return <FontAwesomeIcon className="" icon="paint"/>;
             }
             if (event.category_id == "104") {
-                return <FontAwesomeIcon className="pull-right" icon="film"/>;
+                return <FontAwesomeIcon className="" icon="film"/>;
             }
         }
         // return <FontAwesomeIcon className="" icon="utensils"/>;
@@ -168,9 +169,9 @@ function ResultCardList(props) {
     // }
 
     function getRandomColor() {
-        const color = randomMC.getColor({ shades: ['100', '150  '], text:randomString() });
+        const color = randomMC.getColor({shades: ['100', '150  '], text: randomString()});
         return {
-            backgroundColor: color
+            backgroundColor: "white"
         };
     }
 
@@ -187,10 +188,13 @@ function ResultCardList(props) {
                                 <Typography gutterBottom variant="subtitle1">
                                     {props.event.name.text}
                                 </Typography>
-                                <Typography gutterBottom>Full resolution 1920x1080 • JPEG</Typography>
+                                {/*<Typography gutterBottom>Full resolution 1920x1080 • JPEG</Typography>*/}
                                 {/*<Typography color="textSecondary">ID: 1030114</Typography>*/}
                                 {renderDate(props.event)}
                                 {renderDuration(props.event)}
+                                <LocationCard eventid={props.event.venue_id}></LocationCard>
+                                {renderCategoryLogo(props.event)}
+
 
                             </Grid>
                             {/*<Grid item>*/}
