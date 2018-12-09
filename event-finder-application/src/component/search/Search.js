@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import EventService from "../../services/EventService";
-import ResultList from "../results/ResultList";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import '../util.css'
-import Spinner from "../spinner/Spinner";
 import Searchbar from "./Searchbar";
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import Event from "../event/Event";
@@ -15,7 +12,7 @@ export default class Search extends Component {
             query: '',
             events: [],
             spinner: true,
-            selectedEvent: {'name':{'text':''},'description':{'html':'','text':''}}
+            selectedEvent: {'name': {'text': ''}, 'description': {'html': '', 'text': ''}}
         };
         this.getQueryData();
     }
