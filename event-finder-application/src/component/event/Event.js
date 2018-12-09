@@ -21,8 +21,9 @@ export default class Event extends Component {
             <div name="">
                 <h1> {this.state.selectedEvent.name.text}</h1>
 
-              {/*  <p>{this.state.selectedEvent.description.html}</p>*/}
+                {/*  <p>{this.state.selectedEvent.description.html}</p>*/}
                 <RawHtml children={this.state.selectedEvent.description.text}></RawHtml>
+                
             </div>
         )
     }
