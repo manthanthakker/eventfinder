@@ -1,4 +1,17 @@
+let EVENT_API_URL =
+    'http://localhost:8080/api/event';
 export default class EventService {
+    static createEvent = event => {
+        return fetch(EVENT_API_URL, {
+            body: JSON.stringify(event),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        }).then(response =>
+            response.json())
+    };
+
     static findAllEvents = () => {
         debugger;
         var obj = {
