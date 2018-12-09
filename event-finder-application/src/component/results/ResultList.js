@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import Result from "./Result";
 import "./ResultList.css"
+import red from "@material-ui/core/es/colors/red";
+import ResultCard from "./ResultCard";
+import ResultCardList from "./ResultCardList";
+
 
 export default class ResultList extends Component {
+
     constructor(props) {
         super(props);
+
         this.state = {
             events: props.events
         }
@@ -18,17 +24,19 @@ export default class ResultList extends Component {
 
     render() {
         return (
-            <div name="result-list event-search-list" >
+            <div name="result-list event-search-list">
                 <ul className="list-group event-search-list">
                     {
                         this.state.events.map((event, key) =>
-                            <Result
+                            <ResultCardList
                                 key={key}
-                                event={event}/>
+                                event={event}
+                                selectEvent={this.props.selectEvent}
+                               />
                         )
                     }
                 </ul>
             </div>
-    )
+        )
     }
-    }
+}

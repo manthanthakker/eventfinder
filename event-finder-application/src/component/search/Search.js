@@ -4,7 +4,9 @@ import ResultList from "../results/ResultList";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import '../util.css'
 import Spinner from "../spinner/Spinner";
-
+import Searchbar from "./Searchbar";
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import Event from "../event/Event";
 
 export default class Search extends Component {
     constructor(props) {
@@ -12,7 +14,8 @@ export default class Search extends Component {
         this.state = {
             query: '',
             events: [],
-            spinner: true
+            spinner: true,
+            selectedEvent: {'name':{'text':''},'description':{'html':'','text':''}}
         };
         this.getQueryData();
     }
@@ -57,33 +60,50 @@ export default class Search extends Component {
             })
             .then(this.render());
     };
+    selectEvent = (eventId) => {
+        debugger;
+        this.showSpinner();
+        EventService.findEvent(eventId)
+            .then(event => {
+                debugger;
+                this.setState({
+                    selectedEvent: event
+                });
+
+                this.unshowSpinner();
+            });
+    }
+
 
     render() {
         return (
             <div className="row">
                 <div className="col-3 sidebar"></div>
                 <div className="col-6">
-                    <div name="search-bar"
-                         className="form-inline">
-                        <div className="col-10">
-                            <input name="search-events"
-                                   placeholder="Search a city"
-                                   onChange={this.updateForm}
-                                   className="form-control search-input"/>
+                    <Router>
+                        <div>
+                            <Link to="/search">Hello</Link>
+                            <Route path='/search'
+                                   render={() =>
+                                       <Searchbar
+                                           updateForm={this.updateForm}
+                                           getQueryData={this.getQueryData}
+                                           spinner={this.state.spinner}
+                                           events={this.state.events}
+                                           selectEvent={this.selectEvent}/>}
+                            />
+                            <Link to="/event">Event</Link>
+                            <Route path='/event'
+                                   render={() =>
+                                       <Event
+                                           selectedEvent={this.state.selectedEvent}/>}
+                            />
                         </div>
-                        <div className="col-2">
-                            <FontAwesomeIcon icon="search" size="2x" name="search-query"
-                                             onClick={() => this.getQueryData()}/>
-                        </div>
-                        <div className="col-12">
-                            <Spinner hidden={this.state.spinner}/>
-                            <ResultList
-                                events={this.state.events}/>
-                        </div>
+                    </Router>
 
-                    </div>
+                    {/*</Searchbar>*/}
+
                 </div>
-
 
                 <div className="col-3 sidebar"></div>
             </div>
