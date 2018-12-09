@@ -13,7 +13,7 @@ export default class Search extends Component {
             query: '',
             events: [],
             spinner: true,
-            selectedEvent: {'name': {'text': ''}, 'description': {'html': '', 'text': ''},'logo':{'url':''}},
+            selectedEvent: {'name': {'text': ''}, 'description': {'html': '', 'text': ''}, 'logo': {'url': ''}},
             id: '-1'
         };
         this.getQueryData();
@@ -81,7 +81,7 @@ export default class Search extends Component {
                     <Router>
                         <div>
                             <Link to="/"></Link>
-                            <Route path='/'
+                            <Route exact path='/'
                                    render={() =>
                                        <Searchbar
                                            updateForm={this.updateForm}
@@ -95,7 +95,7 @@ export default class Search extends Component {
                                    render={() =>
                                        <EventBlog
                                            selectedEvent={this.state.selectedEvent}/>
-                                       }
+                                   }
 
 
                             />
