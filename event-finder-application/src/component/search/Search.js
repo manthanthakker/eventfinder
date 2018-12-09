@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import EventService from "../../services/EventService";
-import ResultList from "../results/ResultList";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import '../util.css'
-import Spinner from "../spinner/Spinner";
 import Searchbar from "./Searchbar";
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import Event from "../event/Event";
+import EventBlog from "../event/EventBlog";
 
 export default class Search extends Component {
     constructor(props) {
@@ -15,7 +13,8 @@ export default class Search extends Component {
             query: '',
             events: [],
             spinner: true,
-            selectedEvent: {'name':{'text':''},'description':{'html':'','text':''}}
+            selectedEvent: {'name': {'text': ''}, 'description': {'html': '', 'text': ''},'logo':{'url':''}},
+            id: '-1'
         };
         this.getQueryData();
     }
@@ -69,7 +68,6 @@ export default class Search extends Component {
                 this.setState({
                     selectedEvent: event
                 });
-
                 this.unshowSpinner();
             });
     }
@@ -95,17 +93,21 @@ export default class Search extends Component {
                             <Link to="/event"></Link>
                             <Route path='/event'
                                    render={() =>
-                                       <Event
-                                           selectedEvent={this.state.selectedEvent}/>}
+                                       <EventBlog
+                                           selectedEvent={this.state.selectedEvent}/>
+                                       }
+
+
                             />
                         </div>
                     </Router>
-
+                    {/*<Event*/}
+                    {/*selectedEvent={this.state.selectedEvent}/>*/}
                     {/*</Searchbar>*/}
 
                 </div>
 
-                <div className="col-3 sidebar"></div>
+                {/*<div className="col-3 sidebar"></div>*/}
             </div>
         )
     }
