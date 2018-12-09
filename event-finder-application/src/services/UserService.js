@@ -7,10 +7,11 @@ export default class UserService {
             headers: {
                 'Content-Type': 'application/json'
             },
-            method: 'POST'
+            method: 'POST',
+            credentials: 'include'
         }).then(response =>
             response.json())
-    }
+    };
 
     static register = user => {
         debugger;
@@ -19,10 +20,11 @@ export default class UserService {
             headers: {
                 'Content-Type': 'application/json'
             },
-            method: 'POST'
+            method: 'POST',
+            credentials: 'include'
         }).then(response =>
             response.json())
-    }
+    };
 
 
 
