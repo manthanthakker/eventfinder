@@ -5,9 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import DateTime from "react-datetime"
 import './ResultList.css'
 import randomString from 'random-string'
 import LocationCard from "./LocationCard";
@@ -171,7 +169,7 @@ function ResultCardList(props) {
     function getRandomColor() {
         const color = randomMC.getColor({shades: ['100', '150  '], text: randomString()});
         return {
-            backgroundColor: "white"
+            backgroundColor: color
         };
     }
 
