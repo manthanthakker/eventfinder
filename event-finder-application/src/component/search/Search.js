@@ -82,8 +82,8 @@ export default class Search extends Component {
                 <div className="col-6">
                     <Router>
                         <div>
-                            <Link to="/search">Hello</Link>
-                            <Route path='/search'
+                            <Link to="/"></Link>
+                            <Route path='/'
                                    render={() =>
                                        <Searchbar
                                            updateForm={this.updateForm}
@@ -92,7 +92,7 @@ export default class Search extends Component {
                                            events={this.state.events}
                                            selectEvent={this.selectEvent}/>}
                             />
-                            <Link to="/event">Event</Link>
+                            <Link to="/event"></Link>
                             <Route path='/event'
                                    render={() =>
                                        <Event

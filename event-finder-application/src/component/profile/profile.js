@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import UserService from "../services/UserService";
+import UserService from "../../services/UserService";
 
 export default class Profile extends Component {
     constructor(props) {
@@ -23,9 +23,9 @@ export default class Profile extends Component {
             .then(this.render())
     }
 
-    routeToCourses = () => {
-        window.location.href = 'http://localhost:3000/courses'
-    };
+    // routeToCourses = () => {
+    //     window.location.href = 'http://localhost:3000/courses'
+    // };
 
     routeToLogin = () => {
         window.location.href = 'http://localhost:3000/login'
@@ -62,7 +62,8 @@ export default class Profile extends Component {
                     <input type="text"
                            className="form-control"
                            defaultValue={this.state.first}
-                           placeholder="Your First Name"/>
+                           placeholder="Your First Name"
+                    readOnly/>
                 </div>
 
                 <div className="form-group">
@@ -72,20 +73,21 @@ export default class Profile extends Component {
                     <input type="text"
                            className="form-control"
                            defaultValue={this.state.last}
-                           placeholder="Your Last Name"/>
+                           placeholder="Your Last Name"
+                    readOnly/>
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="role">
-                        Role
-                    </label>
-                    <select className="form-control"
-                            id="role">
-                        <option>Faculty</option>
-                        <option>Student</option>
-                        <option>Administrator</option>
-                    </select>
-                </div>
+                {/*<div className="form-group">*/}
+                    {/*<label htmlFor="role">*/}
+                        {/*Role*/}
+                    {/*</label>*/}
+                    {/*<select className="form-control"*/}
+                            {/*id="role">*/}
+                        {/*<option>Faculty</option>*/}
+                        {/*<option>Student</option>*/}
+                        {/*<option>Administrator</option>*/}
+                    {/*</select>*/}
+                {/*</div>*/}
 
                 <div className="form-group">
                     <label htmlFor="dob">
@@ -96,13 +98,13 @@ export default class Profile extends Component {
                            id="dob"/>
                 </div>
 
-                <div className="form-group">
-                    <button type="submit"
-                            className="btn btn-primary form-control"
-                            onClick={() => this.routeToCourses()}>
-                        Courses
-                    </button>
-                </div>
+                {/*<div className="form-group">*/}
+                    {/*<button type="submit"*/}
+                            {/*className="btn btn-primary form-control"*/}
+                            {/*onClick={() => this.routeToCourses()}>*/}
+                        {/*Courses*/}
+                    {/*</button>*/}
+                {/*</div>*/}
 
                 <div className="form-group">
                     <button type="submit"
