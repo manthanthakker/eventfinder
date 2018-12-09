@@ -17,6 +17,11 @@ import post3 from './blog-post.3.md';
 import RawHtml from "../rawhtml/RawHtml";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import LocationCard from "../results/LocationCard";
+import 'typeface-roboto';
+import Button from '@material-ui/core/Button';
+//import {ReactBingmaps} from 'react-bingmaps';
+import {ReactBingmaps} from '@possumsnorts/react-bingmaps'
+
 
 const styles = theme => ({
     layout: {
@@ -41,7 +46,7 @@ const styles = theme => ({
     mainFeaturedPost: {
         backgroundColor: theme.palette.grey[800],
         color: theme.palette.common.white,
-        marginBottom: theme.spacing.unit * 4
+        marginBottom: theme.spacing.unit,
 
     },
     mainFeaturedPostContent: {
@@ -188,7 +193,7 @@ class EventBlog extends Component {
     }
 
     renderDuration(event) {
-        if (event.start&&event.start.local && event.end.local) {
+        if (event.start && event.start.local && event.end.local) {
             debugger;
             var start = new Date(event.start.local);
             var end = new Date(event.end.local);
@@ -273,7 +278,8 @@ class EventBlog extends Component {
     render() {
 
         return (
-            <React.Fragment>
+
+            <React.Fragment container>
                 <CssBaseline/>
                 <div className={this.props.classes.layout}>
                     {/*<Toolbar className={classes.toolbarMain}>*/}
@@ -305,20 +311,23 @@ class EventBlog extends Component {
                     <main>
                         {/* Main featured post */}
                         <Paper className={this.props.classes.mainFeaturedPost}
-                               style={{backgroundImage: 'url('+this.props.selectedEvent.logo.url+')'}} >
-                            <Grid container >
+                               style={{
+                                   backgroundImage: 'url(' + this.props.selectedEvent.logo.url + ')',
+                                   height: '100%'
+                               }}>
+                            <Grid container>
                                 <Grid item md={6}>
                                     <div className={this.props.classes.mainFeaturedPostContent}>
-                                        <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+                                        <Typography variant="h5" color="inherit" paragraph>
                                             {this.state.selectedEvent.name.text}
                                         </Typography>
-                                        {/*<Typography variant="h5" color="inherit" paragraph>*/}
-                                        {/*{this.state.selectedEvent.name.text}*/}
-                                        {/*</Typography>*/}
                                     </div>
                                 </Grid>
                             </Grid>
                         </Paper>
+                        <Typography component="h2" variant="h3" color="inherit" gutterBottom>
+                            {this.state.selectedEvent.name.text}
+                        </Typography>
                         {/* End main featured post */}
                         {/* Sub featured posts */}
                         <Grid container spacing={40} className={this.props.classes.cardGrid}>
@@ -341,13 +350,26 @@ class EventBlog extends Component {
                                             </CardContent>
                                         </div>
                                         <Hidden xsDown>
-                                            <CardMedia
-                                                className={this.props.classes.cardMedia}
-                                                image="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_164edaf95ee%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_164edaf95ee%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2296.32500076293945%22%20y%3D%22118.8%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" // eslint-disable-line max-len
-                                                title="Image title"
-                                            />
+                                            {/*<CardMedia*/}
+                                            {/*className={this.props.classes.cardMedia}*/}
+                                            {/*image="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_164edaf95ee%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_164edaf95ee%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2296.32500076293945%22%20y%3D%22118.8%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" // eslint-disable-line max-len*/}
+                                            {/*title="Image title"*/}
+                                            {/*/>*/}
+                                            <Button variant="contained" color="primary"
+                                                    className={this.props.classes.margin}>
+                                                Register for this event
+                                            </Button>
                                         </Hidden>
                                     </Card>
+                                    <div className={this.props.classes.cardDetails}>
+                                        <CardContent>
+                                            <ReactBingmaps
+                                                bingmapKey="Art3MZHOR0umXgI8ckqyGezMR3MtbXUpOMQTeZm6lPtrwKvC6Q9I1nLM3rR6jKWN"
+                                                center={[13.0827, 80.2707]}
+                                            width={"400px"} height={"400px"}>
+                                            </ReactBingmaps>
+                                        </CardContent>
+                                    </div>
                                 </Grid>
                             ))}
                         </Grid>
@@ -356,7 +378,7 @@ class EventBlog extends Component {
                             {/* Main content */}
                             <Grid item xs={12} md={8}>
                                 <Typography variant="h6" gutterBottom>
-                                    From the Firehose
+                                    Details
                                 </Typography>
                                 <Divider/>
                                 <RawHtml children={this.props.selectedEvent.description.text}></RawHtml>

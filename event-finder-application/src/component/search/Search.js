@@ -94,7 +94,8 @@ export default class Search extends Component {
                             <Route path='/event'
                                    render={() =>
                                        <EventBlog
-                                           selectedEvent={this.state.selectedEvent}/>}
+                                           selectedEvent={this.state.selectedEvent}/>
+                                       }
 
 
                             />
@@ -106,7 +107,7 @@ export default class Search extends Component {
 
                 </div>
 
-                <div className="col-3 sidebar"></div>
+                {/*<div className="col-3 sidebar"></div>*/}
             </div>
         )
     }
