@@ -9,6 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import './ResultList.css'
 import randomString from 'random-string'
 import LocationCard from "./LocationCard";
+import {Link} from "react-router-dom";
 
 
 var randomMC = require('random-material-color');
@@ -175,36 +176,38 @@ function ResultCardList(props) {
 
     return (
         <div className={classes.root}>
-            <Paper className={classes.paper} style={getRandomColor()}>
-                <Grid container spacing={16}>
-                    <Grid item>
-                        {renderImage(props.event)}
-                    </Grid>
-                    <Grid item xs={12} sm container>
-                        <Grid item xs container direction="column" spacing={5}>
-                            <Grid item xs>
-                                <Typography gutterBottom variant="subtitle1">
-                                    {props.event.name.text}
-                                </Typography>
-                                {/*<Typography gutterBottom>Full resolution 1920x1080 • JPEG</Typography>*/}
-                                {/*<Typography color="textSecondary">ID: 1030114</Typography>*/}
-                                {renderDate(props.event)}
-                                {renderDuration(props.event)}
-                                <LocationCard eventid={props.event.venue_id}></LocationCard>
-                                {renderCategoryLogo(props.event)}
-
-
-                            </Grid>
-                            {/*<Grid item>*/}
-                            {/*<Typography style={{cursor: 'pointer'}}>Remove</Typography>*/}
-                            {/*</Grid>*/}
-                        </Grid>
+            <Link onClick={() => props.selectEvent(props.event.id)} to="/event">
+                <Paper className={classes.paper} style={getRandomColor()}>
+                    <Grid container spacing={16}>
                         <Grid item>
-                            <Typography variant="subtitle1">{renderPrice(props.event)}</Typography>
+                            {renderImage(props.event)}
+                        </Grid>
+                        <Grid item xs={12} sm container>
+                            <Grid item xs container direction="column" spacing={5}>
+                                <Grid item xs>
+                                    <Typography gutterBottom variant="subtitle1">
+                                        {props.event.name.text}
+                                    </Typography>
+                                    {/*<Typography gutterBottom>Full resolution 1920x1080 • JPEG</Typography>*/}
+                                    {/*<Typography color="textSecondary">ID: 1030114</Typography>*/}
+                                    {renderDate(props.event)}
+                                    {renderDuration(props.event)}
+                                    <LocationCard eventid={props.event.venue_id}></LocationCard>
+                                    {renderCategoryLogo(props.event)}
+
+
+                                </Grid>
+                                {/*<Grid item>*/}
+                                {/*<Typography style={{cursor: 'pointer'}}>Remove</Typography>*/}
+                                {/*</Grid>*/}
+                            </Grid>
+                            <Grid item>
+                                <Typography variant="subtitle1">{renderPrice(props.event)}</Typography>
+                            </Grid>
                         </Grid>
                     </Grid>
-                </Grid>
-            </Paper>
+                </Paper>
+            </Link>
         </div>
     );
 }
