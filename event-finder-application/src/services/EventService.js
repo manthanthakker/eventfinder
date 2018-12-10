@@ -14,6 +14,15 @@ export default class EventService {
             response.json())
     };
 
+    static getCusstomEvents = () => {
+        let url = EVENT_API_URL + '/custom';
+        return fetch(url, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'GET'
+        }).then(response =>
+            response.json())
 
     static registerUserForEvent = (userId, event) => {
         return EventService.findVenue(event.venue_id).then(venue => {
