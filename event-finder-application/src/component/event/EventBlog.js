@@ -21,6 +21,9 @@ import 'typeface-roboto';
 import Button from '@material-ui/core/Button';
 //import {ReactBingmaps} from 'react-bingmaps';
 import {ReactBingmaps} from '@possumsnorts/react-bingmaps'
+import RegisteredUsers from "../registeredusers/RegisteredUsers";
+import EventService from "../../services/EventService";
+import Snackbar from '@material-ui/core/Snackbar';
 
 
 const styles = theme => ({
@@ -125,17 +128,55 @@ const archives = [
 
 const social = ['GitHub', 'Twitter', 'Facebook'];
 
+
 class EventBlog extends Component {
 
     constructor(props) {
         super(props);
-
+        props.selectedEvent.registeredUsers = [{}];
         this.state = {
             selectedEvent: props.selectedEvent,
             classes: props.classes,
-            background: props.selectedEvent.logo.url
+            background: props.selectedEvent.logo.url,
+            open: false,
+            vertical: 'top',
+            horizontal: 'center',
+            registered: false
         }
+        this.fetchUsers(props.selectedEvent);
 
+
+    }
+
+
+    registerUserForEvent = () => {
+
+        EventService.registerUserForEvent(2, this.state.selectedEvent).then(()=>{
+            this.setState({
+                open: true,
+                registered: true
+            });
+            this.fetchUsers(this.props.selectedEvent);
+        });
+
+
+    }
+
+    handleClose = () => {
+        this.setState({open: false});
+    }
+
+
+    fetchUsers(event) {
+
+        EventService.findRegisteredUsers(event.id).then(
+            (registeredUsers => {
+                this.props.selectedEvent.RegisteredUsers = registeredUsers;
+                this.setState({
+                    selectedEvent: this.props.selectedEvent
+                })
+            })
+        )
 
     }
 
@@ -246,7 +287,6 @@ class EventBlog extends Component {
         };
     }
 
-
     renderCategoryLogo(event) {
         debugger;
         if (event.category_id) {
@@ -275,13 +315,49 @@ class EventBlog extends Component {
 
     }
 
+    renderRegisteredUsers(selectedEvent) {
+        if (selectedEvent.RegisteredUsers)
+            return (<Typography>{
+                selectedEvent.RegisteredUsers.length
+            }</Typography>)
+    }
+
+    renderButton(registered) {
+        debugger;
+        if (registered == false) {
+            return <Button variant="contained" color="primary"
+                           className={this.props.classes.margin}
+                           onClick={() => this.registerUserForEvent()}>
+                Register for this event
+            </Button>
+        }
+        else {
+            return <Button disabled variant="contained" color="primary"
+                           className={this.props.classes.margin}
+                           onClick={() => this.registerUserForEvent()}>
+                Already Registered
+            </Button>
+        }
+
+    }
+
     render() {
+
 
         return (
 
             <React.Fragment container>
                 <CssBaseline/>
                 <div className={this.props.classes.layout}>
+                    <Snackbar
+
+                        open={this.state.open}
+                        onClose={this.handleClose}
+                        ContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">Successfully registered!!</span>}
+                    />
                     {/*<Toolbar className={classes.toolbarMain}>*/}
                     {/*<Button size="small">Subscribe</Button>*/}
                     {/*<Typography*/}
@@ -355,10 +431,8 @@ class EventBlog extends Component {
                                             {/*image="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_164edaf95ee%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_164edaf95ee%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2296.32500076293945%22%20y%3D%22118.8%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" // eslint-disable-line max-len*/}
                                             {/*title="Image title"*/}
                                             {/*/>*/}
-                                            <Button variant="contained" color="primary"
-                                                    className={this.props.classes.margin}>
-                                                Register for this event
-                                            </Button>
+                                            {this.renderButton(this.state.registered)}
+
                                         </Hidden>
                                     </Card>
                                     <div className={this.props.classes.cardDetails}>
@@ -366,7 +440,7 @@ class EventBlog extends Component {
                                             <ReactBingmaps
                                                 bingmapKey="Art3MZHOR0umXgI8ckqyGezMR3MtbXUpOMQTeZm6lPtrwKvC6Q9I1nLM3rR6jKWN"
                                                 center={[13.0827, 80.2707]}
-                                            width={"400px"} height={"400px"}>
+                                                width={"400px"} height={"400px"}>
                                             </ReactBingmaps>
                                         </CardContent>
                                     </div>
@@ -393,10 +467,12 @@ class EventBlog extends Component {
                             <Grid item xs={12} md={4}>
                                 <Paper elevation={1} className={this.props.classes.sidebarAboutBox} spacing={1}>
                                     <Typography variant="h6" gutterBottom>
-                                        Number of People Going
+                                        See who is going?
                                     </Typography>
-                                    <Typography>
-                                        10000000
+                                    <RegisteredUsers registeredUsers={this.props.selectedEvent}></RegisteredUsers>
+
+                                    <Typography variant="h6" gutterBottom>
+                                        {this.renderRegisteredUsers(this.props.selectedEvent)}
                                     </Typography>
                                 </Paper>
 
