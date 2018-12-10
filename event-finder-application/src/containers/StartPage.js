@@ -3,7 +3,7 @@ import {BrowserRouter as Router,Link, Route} from 'react-router-dom'
 import Login from "../component/login/login"
 // import Profile from "../component/login/login";
 import Register from "../component/register/register";
-import Profile from "../component/profile/profile";
+import Profile from "../component/profile/Profile";
 import Search from "../component/search/Search";
 
 export default class StartPage extends Component {
