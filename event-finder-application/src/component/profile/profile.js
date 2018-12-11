@@ -16,8 +16,8 @@ export default class Profile extends Component {
                 this.setState({
                     loggedUser: user,
                     user: user.username,
-                    first: user.first ? user.first : '',
-                    last: user.last ? user.last : '',
+                    first: user.firstName,
+                    last: user.lastName
                 })
             })
             .then(this.render())
@@ -27,14 +27,8 @@ export default class Profile extends Component {
     //     window.location.href = 'http://localhost:3000/courses'
     // };
 
-    routeToLogin = () => {
-        window.location.href = 'http://localhost:3000/login'
-    };
 
-    userLogout = () => {
-        UserService.logout()
-            .then(this.routeToLogin())
-    };
+
 
     render() {
         // console.log(this.state)
@@ -63,7 +57,7 @@ export default class Profile extends Component {
                            className="form-control"
                            defaultValue={this.state.first}
                            placeholder="Your First Name"
-                    readOnly/>
+                           readOnly/>
                 </div>
 
                 <div className="form-group">
@@ -74,19 +68,19 @@ export default class Profile extends Component {
                            className="form-control"
                            defaultValue={this.state.last}
                            placeholder="Your Last Name"
-                    readOnly/>
+                           readOnly/>
                 </div>
 
                 {/*<div className="form-group">*/}
-                    {/*<label htmlFor="role">*/}
-                        {/*Role*/}
-                    {/*</label>*/}
-                    {/*<select className="form-control"*/}
-                            {/*id="role">*/}
-                        {/*<option>Faculty</option>*/}
-                        {/*<option>Student</option>*/}
-                        {/*<option>Administrator</option>*/}
-                    {/*</select>*/}
+                {/*<label htmlFor="role">*/}
+                {/*Role*/}
+                {/*</label>*/}
+                {/*<select className="form-control"*/}
+                {/*id="role">*/}
+                {/*<option>Faculty</option>*/}
+                {/*<option>Student</option>*/}
+                {/*<option>Administrator</option>*/}
+                {/*</select>*/}
                 {/*</div>*/}
 
                 <div className="form-group">
@@ -99,20 +93,29 @@ export default class Profile extends Component {
                 </div>
 
                 {/*<div className="form-group">*/}
-                    {/*<button type="submit"*/}
-                            {/*className="btn btn-primary form-control"*/}
-                            {/*onClick={() => this.routeToCourses()}>*/}
-                        {/*Courses*/}
-                    {/*</button>*/}
+                {/*<button type="submit"*/}
+                {/*className="btn btn-primary form-control"*/}
+                {/*onClick={() => this.routeToCourses()}>*/}
+                {/*Courses*/}
+                {/*</button>*/}
                 {/*</div>*/}
 
                 <div className="form-group">
                     <button type="submit"
-                            onClick={() => this.userLogout()}
+                            onClick={() => this.props.userLogout()}
                             className="btn btn-danger form-control">
                         Log Out
                     </button>
                 </div>
+
+                <div className="form-group">
+                    <button type="submit"
+                            onClick={() => this.routeToCreateEvent}
+                            className="btn btn-danger form-control">
+                        Log Out
+                    </button>
+                </div>
+
             </div>
         );
     }

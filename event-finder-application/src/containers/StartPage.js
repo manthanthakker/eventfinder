@@ -3,12 +3,61 @@ import {BrowserRouter as Router,Link, Route} from 'react-router-dom'
 import Login from "../component/login/login"
 // import Profile from "../component/login/login";
 import Register from "../component/register/register";
-import Profile from "../component/profile/profile";
 import Search from "../component/search/Search";
+import UserService from "../services/UserService";
+import Profile from "../component/profile/profile"
+import CreateEvent from "../component/create-event/CreateEvent";
 
 export default class StartPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userId:15,
+            usr:''
+        };
+    }
+
+    checkUserCredentials = (user) => {
+        debugger;
+        UserService.login(user)
+            .then(creds => this.setState({
+                userId: creds.id,
+                usr:creds
+            }))
+            .then(this.routeToProfile)
+    };
+
+    routeToProfile = () => {
+        debugger;
+        console.log('hello')
+        console.log(this.state.userId)
+        if (this.state.userId) {
+            window.location.href = 'http://localhost:3000/profile'
+        }
+    };
+
+    userLogout = () => {
+        UserService.logout()
+            .then(this.routeToLogin())
+    };
 
 
+    routeToRegister = () => {
+        window.location.href = 'http://localhost:3000/register'
+    };
+
+    registerUser = (user) => {
+        debugger;
+        UserService.register(user)
+            .then(creds => this.setState({
+                userId: creds.id
+            }))
+            .then(this.routeToProfile())
+    };
+
+    routeToLogin = () => {
+        window.location.href = 'http://localhost:3000/login'
+    };
 
     render() {
         return (
@@ -42,14 +91,18 @@ export default class StartPage extends Component {
                         </div>
                     </nav>
                     <Route exact path="/register"
-                           render={() => <Register/>}/>
+                           render={() => <Register registerUser={this.registerUser}
+                                                   routeToLogin={this.routeToLogin}/>}/>
                     <Route exact path="/login"
-                           render={() => <Login/>}/>
+                           render={() => <Login checkUserCredentials={this.checkUserCredentials}
+                                                routeToRegister={this.routeToRegister}/>}/>
                     <Route exact path="/profile"
                            render={() => <Profile/>}/>
                     <Route exact path="/"
-                           render={() => <Search/>}/>
+                           render={() => <Search userLogout={this.userLogout}/>}/>
 
+                    <Route exact path="/event"
+                           render={() => <CreateEvent/>}/>
 
                 </div>
             </Router>

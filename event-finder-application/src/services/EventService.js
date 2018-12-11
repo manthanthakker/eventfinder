@@ -23,6 +23,7 @@ export default class EventService {
             method: 'GET'
         }).then(response =>
             response.json())
+    };
 
     static registerUserForEvent = (userId, event) => {
         return EventService.findVenue(event.venue_id).then(venue => {

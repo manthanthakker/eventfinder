@@ -9,7 +9,8 @@ export default class Register extends Component {
             firstname: '',
             lastname: '',
             password: '',
-            currentUser: {}
+            about:'',
+            role:'Host',
         }
     }
 
@@ -35,26 +36,20 @@ export default class Register extends Component {
                     password: event.target.value
                 })
                 break;
+            case "about":
+                this.setState({
+                    about: event.target.value
+                })
+                break;
+            case "role":
+                this.setState({
+                    role: event.target.value
+                })
+                break;
+
         }
     };
 
-    registerUser = () => {
-        let user = {
-            "username": this.state.username,
-            "firstname": this.state.firstname,
-            "lastname": this.state.lastname,
-            "password": this.state.password,
-        };
-        UserService.register(user)
-            .then(creds => this.setState({
-                currentUser: creds
-            }))
-            .then(this.routeToProfile)
-    };
-
-    routeToLogin = () => {
-        window.location.href = 'http://localhost:3000/login'
-    };
 
     routeToProfile = () => {
         window.location.href = 'http://localhost:3000/profile'
@@ -134,16 +129,57 @@ export default class Register extends Component {
                     </div>
                 </div>
 
+                    <div className="row form-group">
+                        <div className="col">
+                            <label htmlFor="role">Role</label>
+                        </div>
+                        <div className="col-10">
+                            <select value={this.state.role} onChange={this.inputFieldChange} className="form-control"
+                            id="role">
+                            <option>Host</option>
+                            <option>Registering User</option>
+                            </select>
+                        </div>
+                    </div>
+
+                <div className="row form-group">
+                    <div className="col">
+                        <label htmlFor="about"
+                               className="control-label">
+                            About me
+                        </label>
+                    </div>
+                    <div className="col-10">
+                        <input type="text-area"
+                               className="form-control"
+                               id="about"
+                               onChange={this.inputFieldChange}
+                               placeholder="Tell us a bit about yourself!"
+                               required/>
+                    </div>
+                </div>
+
+
+
                 <div className="row justify-content-between">
                     <div className="col">
                         <button className="btn btn-primary"
-                                onClick={() => this.registerUser()}>
+                                onClick={() => this.props.registerUser(
+                                    {
+                                        "username": this.state.username,
+                                        "firstName": this.state.firstname,
+                                        "aboutMe":this.state.about,
+                                        "lastName": this.state.lastname,
+                                        "password": this.state.password,
+                                        "userType":this.state.role
+                                    }
+                                )}>
                             Sign Up
                         </button>
                     </div>
                     <div>
                         <button className="btn btn-outline-secondary"
-                                onClick={() => this.routeToLogin()}>
+                                onClick={() => this.props.routeToLogin()}>
                             Log In
                         </button>
                     </div>
