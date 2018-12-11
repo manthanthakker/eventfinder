@@ -49,17 +49,7 @@ function RegisteredUsers(props) {
         <div className={classes.root}>
 
             {renderRegisteredUsers(props)}
-            {/*<ExpansionPanel>*/}
-            {/*<ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>*/}
-            {/*<Typography className={classes.heading}>Expansion Panel 2</Typography>*/}
-            {/*</ExpansionPanelSummary>*/}
-            {/*<ExpansionPanelDetails>*/}
-            {/*<Typography>*/}
-            {/*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,*/}
-            {/*sit amet blandit leo lobortis eget.*/}
-            {/*</Typography>*/}
-            {/*</ExpansionPanelDetails>*/}
-            {/*</ExpansionPanel>*/}
+
             <ExpansionPanel>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                     <Typography className={classes.heading}>Manthan Thakker</Typography>
@@ -76,7 +66,7 @@ function RegisteredUsers(props) {
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Typography>
-                        I dint get my IR marks yet. I am stressed.
+                      I am from South Bombay and I love partying!
                     </Typography>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
