@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import EventService from "../../services/EventService";
+import EventCard from "./EventCard";
 
 export default class RecentEvents extends Component {
     constructor(props) {
@@ -19,7 +20,9 @@ export default class RecentEvents extends Component {
                 <h1>Recent Events</ h1>
                 <ul>
                 {this.state.recentEvents.map((event, key) =>
-                    <li>{event.name}</li>
+                    <EventCard
+                        index={key}
+                        event={event}/>
                 )}
                 </ul>
             </div>
