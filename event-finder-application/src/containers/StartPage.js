@@ -46,6 +46,11 @@ export default class StartPage extends Component {
         window.location.href = 'http://localhost:3000/register'
     };
 
+    routeToCreateEvent = () => {
+        debugger;
+        window.location.href = 'http://localhost:3000/create/event'
+    };
+
     registerUser = (user) => {
         debugger;
         UserService.register(user)
@@ -57,6 +62,10 @@ export default class StartPage extends Component {
 
     routeToLogin = () => {
         window.location.href = 'http://localhost:3000/login'
+    };
+
+    routeToSearchEvent = () => {
+        window.location.href = 'http://localhost:3000/'
     };
 
     render() {
@@ -75,13 +84,20 @@ export default class StartPage extends Component {
 
                             <div className="col-md-6 col-lg-3 form-group">
                                 <div className="row float-right">
-                                    <div className="col-6">
+
+                                    <div className="col-4">
+                                        <Link to="/" className="btn btn-dark">Search
+                                            {/*<i className="fa fa-table"></i>*/}
+                                        </Link>
+                                    </div>
+
+                                    <div className="col-4">
                                     <Link to="/register" className="btn btn-dark">Register
                                         {/*<i className="fa fa-table"></i>*/}
                                     </Link>
                                     </div>
 
-                                    <div className="col-6">
+                                    <div className="col-4">
                                     <Link to="/login" className="btn btn-dark">Login
                                         {/*<i className="fa fa-th-large"></i>*/}
                                     </Link>
@@ -97,11 +113,12 @@ export default class StartPage extends Component {
                            render={() => <Login checkUserCredentials={this.checkUserCredentials}
                                                 routeToRegister={this.routeToRegister}/>}/>
                     <Route exact path="/profile"
-                           render={() => <Profile/>}/>
+                           render={() => <Profile routeToCreateEvent={this.routeToCreateEvent}
+                                                  routeToSearchEvent = {this.routeToSearchEvent}/>}/>
                     <Route exact path="/"
                            render={() => <Search userLogout={this.userLogout}/>}/>
 
-                    <Route exact path="/event"
+                    <Route exact path="/create/event"
                            render={() => <CreateEvent/>}/>
 
                 </div>

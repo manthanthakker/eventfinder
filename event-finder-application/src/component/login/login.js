@@ -66,7 +66,7 @@ export default class Login extends Component {
                                    required/>
                         </div>
                     </div>
-                    <div className="row form-group justify-content-between">
+                    <div className="row form-group float-right">
                         <div className="col">
                             <button className="btn btn-primary form-group"
                                     onClick={() => this.props.checkUserCredentials(
@@ -76,14 +76,6 @@ export default class Login extends Component {
                                         }
                                     )}>
                                 Log In
-                            </button>
-                        </div>
-
-                        <div>
-                            <button className="btn btn-link form-group" onClick={() => this.props.routeToRegister}>
-                                <u>
-                                    Sign up.
-                                </u>
                             </button>
                         </div>
                     </div>

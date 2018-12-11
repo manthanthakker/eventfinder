@@ -27,20 +27,6 @@ export default class UserService {
             response.json())
     }
 
-    // static logout = () => {
-    //     return fetch(LOGOUT_API_URL, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         credentials: 'include'
-    //     }).then(function(response) {
-    //         return response.text()
-    //             .then(function(text) {
-    //                 return text ? JSON.parse(text) : {}
-    //             })
-    //     });
-    // };
 
     static logout = () => {
         debugger;

@@ -108,14 +108,17 @@ export default class Profile extends Component {
                     </button>
                 </div>
 
-                <div className="form-group">
-                    <button type="submit"
-                            onClick={() => this.routeToCreateEvent}
-                            className="btn btn-danger form-control">
-                        Log Out
-                    </button>
-                </div>
 
+
+
+                <div className="row float-right">
+                    <div className="col">
+                        <button className="btn btn-primary"
+                                onClick={() => this.props.routeToCreateEvent()}>
+                            Host an Event?
+                        </button>
+                    </div>
+                </div>
             </div>
         );
     }

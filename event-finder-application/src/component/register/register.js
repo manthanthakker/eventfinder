@@ -161,7 +161,7 @@ export default class Register extends Component {
 
 
 
-                <div className="row justify-content-between">
+                <div className="row float-right">
                     <div className="col">
                         <button className="btn btn-primary"
                                 onClick={() => this.props.registerUser(
@@ -175,12 +175,6 @@ export default class Register extends Component {
                                     }
                                 )}>
                             Sign Up
-                        </button>
-                    </div>
-                    <div>
-                        <button className="btn btn-outline-secondary"
-                                onClick={() => this.props.routeToLogin()}>
-                            Log In
                         </button>
                     </div>
                 </div>
