@@ -6,6 +6,7 @@ import Register from "../component/register/register";
 import Search from "../component/search/Search";
 import UserService from "../services/UserService";
 import Profile from "../component/profile/profile"
+import CreateEvent from "../component/create-event/CreateEvent";
 
 export default class StartPage extends Component {
     constructor(props) {
@@ -100,6 +101,8 @@ export default class StartPage extends Component {
                     <Route exact path="/"
                            render={() => <Search userLogout={this.userLogout}/>}/>
 
+                    <Route exact path="/event"
+                           render={() => <CreateEvent/>}/>
 
                 </div>
             </Router>

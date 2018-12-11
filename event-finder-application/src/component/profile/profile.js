@@ -107,6 +107,15 @@ export default class Profile extends Component {
                         Log Out
                     </button>
                 </div>
+
+                <div className="form-group">
+                    <button type="submit"
+                            onClick={() => this.routeToCreateEvent}
+                            className="btn btn-danger form-control">
+                        Log Out
+                    </button>
+                </div>
+
             </div>
         );
     }
