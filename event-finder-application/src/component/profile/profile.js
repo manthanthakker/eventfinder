@@ -16,8 +16,8 @@ export default class Profile extends Component {
                 this.setState({
                     loggedUser: user,
                     user: user.username,
-                    first: user.first ? user.first : '',
-                    last: user.last ? user.last : '',
+                    first: user.firstName,
+                    last: user.lastName
                 })
             })
             .then(this.render())
@@ -27,14 +27,8 @@ export default class Profile extends Component {
     //     window.location.href = 'http://localhost:3000/courses'
     // };
 
-    routeToLogin = () => {
-        window.location.href = 'http://localhost:3000/login'
-    };
 
-    userLogout = () => {
-        UserService.logout()
-            .then(this.routeToLogin())
-    };
+
 
     render() {
         // console.log(this.state)
@@ -108,7 +102,7 @@ export default class Profile extends Component {
 
                 <div className="form-group">
                     <button type="submit"
-                            onClick={() => this.userLogout()}
+                            onClick={() => this.props.userLogout()}
                             className="btn btn-danger form-control">
                         Log Out
                     </button>

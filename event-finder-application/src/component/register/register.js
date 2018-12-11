@@ -11,7 +11,6 @@ export default class Register extends Component {
             password: '',
             about:'',
             role:'Host',
-            currentUser: {}
         }
     }
 
@@ -51,18 +50,6 @@ export default class Register extends Component {
         }
     };
 
-    registerUser = (user) => {
-        debugger;
-        UserService.register(user)
-            .then(creds => this.setState({
-                currentUser: creds
-            }))
-            .then(this.routeToProfile)
-    };
-
-    routeToLogin = () => {
-        window.location.href = 'http://localhost:3000/login'
-    };
 
     routeToProfile = () => {
         window.location.href = 'http://localhost:3000/profile'
@@ -177,7 +164,7 @@ export default class Register extends Component {
                 <div className="row justify-content-between">
                     <div className="col">
                         <button className="btn btn-primary"
-                                onClick={() => this.registerUser(
+                                onClick={() => this.props.registerUser(
                                     {
                                         "username": this.state.username,
                                         "firstName": this.state.firstname,
@@ -192,7 +179,7 @@ export default class Register extends Component {
                     </div>
                     <div>
                         <button className="btn btn-outline-secondary"
-                                onClick={() => this.routeToLogin()}>
+                                onClick={() => this.props.routeToLogin()}>
                             Log In
                         </button>
                     </div>

@@ -5,15 +5,13 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: '',
-            password: '',
-            currentUser: {}
+            username: '',
+            password: ''
         }
     }
-
     updateUsername = event =>
         this.setState({
-            user: event.target.value
+            username: event.target.value
         });
 
     updatePassword = event =>
@@ -21,30 +19,6 @@ export default class Login extends Component {
             password: event.target.value
         });
 
-    checkUserCredentials = () => {
-        debugger;
-        let user = {
-            "username": this.state.user,
-            "password": this.state.password
-        };
-        console.log(user)
-        UserService.login(user)
-            .then(creds => this.setState({
-                currentUser: creds
-            }))
-            .then(this.routeToProfile)
-    };
-
-    routeToProfile = () => {
-        console.log(this.state.currentUser.id)
-        if (this.state.currentUser.id) {
-            window.location.href = 'http://localhost:3000/profile'
-        }
-    };
-
-    routeToRegister = () => {
-        window.location.href = 'http://localhost:3000/register'
-    };
 
     render() {
         return (
@@ -95,13 +69,18 @@ export default class Login extends Component {
                     <div className="row form-group justify-content-between">
                         <div className="col">
                             <button className="btn btn-primary form-group"
-                                    onClick={() => this.checkUserCredentials()}>
+                                    onClick={() => this.props.checkUserCredentials(
+                                        {
+                                            "username": this.state.username,
+                                            "password": this.state.password
+                                        }
+                                    )}>
                                 Log In
                             </button>
                         </div>
 
                         <div>
-                            <button className="btn btn-link form-group" onClick={() => this.routeToRegister()}>
+                            <button className="btn btn-link form-group" onClick={() => this.props.routeToRegister}>
                                 <u>
                                     Sign up.
                                 </u>
