@@ -34,8 +34,7 @@ function RegisteredUsers(props) {
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                             <Typography>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                sit amet blandit leo lobortis eget.
+                                Description
                             </Typography>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
@@ -56,26 +55,20 @@ function RegisteredUsers(props) {
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Typography>
-                       I am from Mumbai always looking for music events in Boston.
-                    </Typography>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                    <Typography className={classes.heading}>Aunsh Chaudhari</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Typography>
-                      I am from South Bombay and I love partying!
+                        I am from Mumbai always looking for music events in Boston.
                     </Typography>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
             <ExpansionPanel disabled>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                    <Typography className={classes.heading}>Disabled Expansion Panel</Typography>
+                    <Typography className={classes.heading}>Aunsh Chaudhari</Typography>
                 </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                    <Typography>
+                        I am from South Bombay and I love partying!
+                    </Typography>
+                </ExpansionPanelDetails>
             </ExpansionPanel>
-
         </div>
     );
 }
