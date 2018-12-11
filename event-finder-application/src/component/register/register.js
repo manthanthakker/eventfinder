@@ -1,75 +1,155 @@
 import React, {Component} from 'react'
+import UserService from "../../services/UserService";
 
 export default class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username: '',
-            password:''
-        };
+            firstname: '',
+            lastname: '',
+            password: '',
+            currentUser: {}
+        }
     }
 
-    updateUsername = event =>
-        this.setState({
-            username: event.target.value
-        })
+    inputFieldChange = (event) => {
+        switch (event.target.id.toString()) {
+            case "firstname":
+                this.setState({
+                    firstname: event.target.value
+                });
+                break;
+            case "lastname":
+                this.setState({
+                    lastname: event.target.value
+                });
+                break;
+            case "username":
+                this.setState({
+                    username: event.target.value
+                })
+                break;
+            case "password":
+                this.setState({
+                    password: event.target.value
+                })
+                break;
+        }
+    };
 
+    registerUser = () => {
+        let user = {
+            "username": this.state.username,
+            "firstname": this.state.firstname,
+            "lastname": this.state.lastname,
+            "password": this.state.password,
+        };
+        UserService.register(user)
+            .then(creds => this.setState({
+                currentUser: creds
+            }))
+            .then(this.routeToProfile)
+    };
 
-    updatePassword = event =>
-        this.setState({
-            password: event.target.value
-        })
+    routeToLogin = () => {
+        window.location.href = 'http://localhost:3000/login'
+    };
+
+    routeToProfile = () => {
+        window.location.href = 'http://localhost:3000/profile'
+    };
 
     render() {
         return (
-            <div class="container">
-                <h1>Sign Up</h1>
-                <form>
-                    <div class="form-group row">
-                        <label for="username" class="col-sm-2 col-form-label">
-                            Username </label>
-                        <div class="col-sm-10">
-                            <input onChange={this.updateUsername} class="form-control" id="username" placeholder="Alice"/>
-                        </div>
+            <div className="container">
+                <div className="form-group">
+                    <h3>Register Here</h3>
+                </div>
+                <div className="row form-group">
+                    <div className="col">
+                        <label htmlFor="fname"
+                               className="control-label">
+                            First Name
+                        </label>
                     </div>
-                    <div class="form-group row">
-                        <label for="password" class="col-sm-2 col-form-label">
-                            Password </label>
-                        <div class="col-sm-10">
-                            <input  onChange={this.updatePassword} type="password" class="form-control wbdv-password-fld"
-                                    id="password" placeholder="123qwe#$%"/>
-                        </div>
+                    <div className="col-10">
+                        <input type="text"
+                               className="form-control"
+                               onChange={this.inputFieldChange}
+                               id="firstname"
+                               placeholder="Your First Name"
+                               required/>
                     </div>
+                </div>
 
-                    <div class="form-group row">
-                        <label for="password" class="col-sm-2 col-form-label">
-                            Verify Password </label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control wbdv-password-fld"
-                                   id="vpassword" placeholder="123qwe#$%"/>
-                        </div>
+                <div className="row form-group">
+                    <div className="col">
+                        <label htmlFor="lastname"
+                               className="control-label">
+                            Last Name
+                        </label>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label"></label>
-                        <div class="col-sm-10">
-                            <div onClick={() => this.props.register({
-                                username: this.state.username,
-                                password:this.state.password
-                            })}class="btn btn-primary btn-block">Sign up</div>
-                            <div class="row">
-                                <div class="col-6">
-                                </div>
-                                <div class="col-6">
-                                    <a href="../index.html" class="float-right">Cancel</a>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="col-10">
+                        <input type="text"
+                               className="form-control"
+                               id="lastname"
+                               onChange={this.inputFieldChange}
+                               placeholder="Your Last Name"
+                               required/>
                     </div>
-                </form>
+                </div>
+
+                <div className="row form-group">
+                    <div className="col">
+                        <label htmlFor="username"
+                               className="control-label">
+                            Username
+                        </label>
+                    </div>
+                    <div className="col-10">
+                        <input type="text"
+                               className="form-control"
+                               id="username"
+                               onChange={this.inputFieldChange}
+                               placeholder="Your User Name"
+                               required/>
+                    </div>
+                </div>
+
+                <div className="row form-group">
+                    <div className="col">
+                        <label htmlFor="password"
+                               className="control-label">
+                            Password
+                        </label>
+                    </div>
+                    <div className="col-10">
+                        <input type="password"
+                               className="form-control"
+                               id="password"
+                               onChange={this.inputFieldChange}
+                               placeholder="Your Password"
+                               required/>
+                    </div>
+                </div>
+
+                <div className="row justify-content-between">
+                    <div className="col">
+                        <button className="btn btn-primary"
+                                onClick={() => this.registerUser()}>
+                            Sign Up
+                        </button>
+                    </div>
+                    <div>
+                        <button className="btn btn-outline-secondary"
+                                onClick={() => this.routeToLogin()}>
+                            Log In
+                        </button>
+                    </div>
+                </div>
             </div>
         )
     }
-
-
 
 }
